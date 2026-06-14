@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Connect with us to book a personal Vedic astrology consultation. View our social media and fill out the contact form.">
+    <title>Book Consultation & Connect | Astromarg</title>
+    <link rel="canonical" href="https://astromarg.com/connect" />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <div style="height: 100px;"></div>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container booking-container">
+            <div class="booking-header">
+                <h2 class="section-title">Book Your Consultation</h2>
+                <p>Fill out the form below to request an appointment.</p>
+            </div>
+            
+            <form class="booking-form" id="bookingForm" onsubmit="event.preventDefault(); alert('Booking form submitted! (This is a demo)');">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="+91 98765 43210">
+                    </div>
+                    <div class="input-group">
+                        <label for="dob">Birth Date</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="tob">Birth Time</label>
+                        <input type="time" id="tob" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="pob">Birth Place</label>
+                        <input type="text" id="pob" required placeholder="City, State, Country">
+                    </div>
+                    <div class="input-group">
+                        <label for="service">Select Service</label>
+                        <select id="service" required>
+                            <option value="" disabled selected>Choose a service</option>
+                            <option value="kundli">Kundli Reading</option>
+                            <option value="marriage">Marriage Astrology</option>
+                            <option value="career">Career Guidance</option>
+                            <option value="business">Business Astrology</option>
+                            <option value="numerology">Numerology</option>
+                            <option value="gemstone">Gemstone Recommendation</option>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="prefTime">Preferred Date & Time</label>
+                        <input type="datetime-local" id="prefTime" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary submit-btn">Confirm Booking</button>
+                
+                <div class="booking-footer">
+                    <div class="secure-badge"><i class="ph ph-lock-key"></i> Secure Payment Processing</div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social" id="social">
+        <div class="container">
+            <h2 class="section-title">Connect With The Astrologer</h2>
+            
+            <div class="social-grid">
+                
+                <!-- Facebook Card -->
+                <div class="social-card facebook">
+                    <div class="social-cover"></div>
+                    <div class="social-profile-img">A</div>
+                    <h4>Astromarg Official</h4>
+                    <p class="followers">45K Followers</p>
+                    <p class="bio">Follow for daily horoscopes and astrology tips.</p>
+                    <a href="#" class="social-btn fb-btn"><i class="ph-fill ph-facebook-logo"></i> Visit Facebook</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

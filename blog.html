@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astromarg Blog | Astrological Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <div style="height: 100px;"></div>
+
+    <section class="section" style="min-height: 60vh;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Astrological Insights</h2>
+                <p>Read our latest articles on Vedic astrology, planetary transits, and remedies.</p>
+            </div>
+            
+            <div class="blog-grid" id="publicBlogGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px;">
+                <!-- Populated by JS -->
+                <p style="text-align: center; width: 100%; color: var(--color-text-muted);">Loading blogs...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for reading full blog post -->
+    <div class="modal" id="readBlogModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; overflow-y: auto; padding: 40px 20px;">
+        <div style="background: #fff; max-width: 800px; margin: 0 auto; border-radius: 16px; padding: 40px; position: relative; margin-top: 40px;">
+            <button onclick="document.getElementById('readBlogModal').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--color-text-main);">&times;</button>
+            <h1 id="readBlogTitle" style="color: var(--color-gold); margin-bottom: 10px; font-family: var(--font-heading);"></h1>
+            <p id="readBlogDate" style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 30px; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px;"></p>
+            <div id="readBlogContent" style="line-height: 1.8; color: var(--color-text-main);"></div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('api/blogs.php');
+                const blogs = await res.json();
+                const grid = document.getElementById('publicBlogGrid');
+                grid.innerHTML = '';
+                
+                if(blogs.length === 0) {
+                    grid.innerHTML = '<p style="text-align: center; width: 100%; grid-column: 1/-1;">No blog posts found. Check back soon!</p>';
+                    return;
+                }
+
+                blogs.forEach(blog => {
+                    const card = document.createElement('div');
+                    card.className = 'service-card';
+                    card.style.cursor = 'pointer';
+                    card.onclick = () => {
+                        document.getElementById('readBlogTitle').innerText = blog.title;
+                        document.getElementById('readBlogDate').innerText = new Date(blog.date).toLocaleDateString();
+                        document.getElementById('readBlogContent').innerHTML = blog.content;
+                        document.getElementById('readBlogModal').style.display = 'block';
+                        document.body.style.overflow = 'hidden'; // prevent scrolling behind modal
+                    };
+                    card.innerHTML = `
+                        <h3 style="margin-bottom: 15px; font-family: var(--font-heading); color: var(--color-text-main);">${blog.title}</h3>
+                        <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 15px;">${new Date(blog.date).toLocaleDateString()}</p>
+                        <p style="color: var(--color-text-muted);">${blog.content.replace(/<[^>]+>/g, '').substring(0, 100)}...</p>
+                        <span style="color: var(--color-gold); font-weight: 600; display: inline-block; margin-top: 15px;">Read More →</span>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                // Close modal on click outside
+                document.getElementById('readBlogModal').addEventListener('click', (e) => {
+                    if(e.target.id === 'readBlogModal') {
+                        document.getElementById('readBlogModal').style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            } catch(e) {
+                console.error("Failed to load blogs", e);
+            }
+        });
+    </script>
+</body>
+</html>
